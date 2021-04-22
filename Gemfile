@@ -60,7 +60,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # add gem
 gem "devise", git: "https://github.com/heartcombo/devise" # エラーが出たので解消されていそうなmaster branchを指定したらクリア
-gem 'omniauth-twitter', '~> 1.4'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
+gem 'omniauth-google-oauth2'
 gem 'kaminari'
 gem 'ransack'
 gem 'jp_prefecture', '~> 1.0'

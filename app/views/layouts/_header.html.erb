@@ -1,0 +1,23 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top" >
+    <div class="container-fluid">
+      <%= link_to "Hoteresi", root_url, {class: "navbar-brand"} %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navmenu1" aria-controls="navmenu1" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu1">
+        <div class="navbar-nav">
+          <% if user_signed_in? %>
+            <%= link_to "about", about_path, {class: "nav-item nav-link"} %>
+            <%= link_to 'profile', edit_user_registration_path, {class: "nav-item nav-link"} %>
+            <%= link_to 'logout', destroy_user_session_path, {method: :delete, class: "nav-item nav-link"}%>
+          <% else %>
+            <%= link_to "about", about_path, {class: "nav-item nav-link"} %>
+            <%= link_to "login", new_user_session_path, {class: "nav-item nav-link"} %>
+            <%= link_to "sign up", new_user_registration_path, {class: "nav-item nav-link"} %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
