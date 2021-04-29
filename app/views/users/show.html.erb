@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-5">
   <div class="col-12 col-md-6">
     <table class="table table-borderless mt-4">
       <thead>
@@ -17,13 +17,36 @@
         <tr>
           <th scope="row">birthday</th>
           <% if @user.birthday == nil %>
-            <td>未登録</td>
+          <td>未登録</td>
           <% else %>
-            <td><%= @user.birthday %></td>
+          <td><%= @user.birthday %></td>
           <% end %>
         </tr>
       </tbody>
     </table>
     <button type="button" class="btn btn-outline-primary"><%= link_to "edit", edit_user_registration_path %></button>
     <button type="button" class="btn btn-outline-primary"><%= link_to "logout", destroy_user_session_path, method: :delete %></button>
+  </div>
+  <div class="col-12 mt-5">
+    <h2>登録ホテル</h2>
+    <% @user.hotels.each do |hotel| %>
+    <div class="card mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-7">
+          <%= image_tag hotel.hotel_img.to_s, {width: "100%",  height: "300"} %>
+        </div>
+        <div class="col-md-5">
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to hotel.hotel_name, hotel_path(id: hotel.id) %></h5>
+            <p class="card-text">Tell: <%= hotel.tell %></p>
+            <p class="card-text">Email: <%= hotel.email %></p>
+          </div>
+          <div class="text-right">
+            <small class="text-muted">Update: <%= hotel.updated_at.strftime('%Y/%m/%d') %></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
 </div>

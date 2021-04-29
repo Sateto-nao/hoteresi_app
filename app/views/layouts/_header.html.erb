@@ -10,7 +10,8 @@
           <% if user_signed_in? %>
             <%= link_to "about", about_path, {class: "nav-item nav-link"} %>
             <%= link_to current_user.name, user_path(current_user.id), {class: "nav-item nav-link"} %>
-            <%= link_to 'profile', edit_user_registration_path, {class: "nav-item nav-link"} %>
+            <%= link_to 'rooms', rooms_path, {class: "nav-item nav-link"} %>
+            <%= link_to 'ホテル登録', new_hotel_path, {class: "nav-item nav-link"} %>
           <% else %>
             <%= link_to "about", about_path, {class: "nav-item nav-link"} %>
             <%= link_to "login", new_user_session_path, {class: "nav-item nav-link"} %>

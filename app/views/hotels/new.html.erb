@@ -1,0 +1,65 @@
+<div class="container mt-5">
+  <%= form_for @hotel do |f| %>
+  <%= render 'layouts/error_message', model: f.object %>
+  <form>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <%= f.label :hotel_name, "ホテル名" %>
+        <%= f.text_field :hotel_name, {class: "form-control"} %>
+      </div>
+      <div class="form-group col-md-2">
+        <%= f.label :tell, "電話番号" %>
+        <%= f.text_field :tell, {class: "form-control"} %>
+      </div>
+      <div class="form-group col-md-3">
+        <%= f.label :email, "Email" %>
+        <%= f.email_field :email, {class: "form-control"} %>
+      </div>
+    </div>
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      <%= f.label :postcode, "郵便番号" %>
+      <%= f.number_field :postcode, {class: "form-control"} %>
+    </div>
+    <div class="form-group col-md-3">
+      <%= f.label :prefecture_code, "都道府県" %>
+      <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {prompt: "都道府県"}, {class: "form-control"} %>
+    </div>
+  </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <%= f.label :address_city, "市区町村" %>
+        <%= f.text_field :address_city, {class: "form-control"} %>
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :address_street, "番地以降" %>
+        <%= f.text_field :address_street, {class: "form-control"} %>
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :address_building, "建造物名" %>
+        <%= f.text_field :address_building, {class: "form-control"} %>
+      </div>
+    </div>
+    <div class="row">
+    <div class="form-group col-md-6">
+      <%= f.label :introduction, "ホテル紹介文" %>
+      <%= f.text_area :introduction, {class: "form-control", rows: "5"} %>
+    </div>
+    <div class="form-group col-md-4">
+      <%= f.label :hotel_img, "ホテル画像" %>
+      <%= f.file_field :hotel_img, {class: "form-control-file"} %>
+    </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck">
+        <label class="form-check-label" for="gridCheck">
+          Check me out
+        </label>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">登録</button>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+  </form>
+  <% end %>
+</div>

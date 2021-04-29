@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="card mb-3">
+    <%= image_tag @hotel.hotel_img.to_s, {width: "100%",  height: "450"} %>
+    <div class="card-body">
+      <h5 class="card-title"><%= @hotel.hotel_name %></h5>
+      <p class="card-text text-right">Tell: <%= @hotel.tell %></p>
+      <p class="card-text text-right">Email: <%= @hotel.email %></p>
+      <p class="card-text">Address: <%=  %></p>
+      <p class="card-text text-muted">Hotel message</p>
+      <p class="card-text"><%= @hotel.introduction %></p>
+    </div>
+    <div class="card-footer text-right">
+      <small class="text-muted">Update: <%= @hotel.updated_at.strftime('%Y/%m/%d') %></small>
+    </div>
+  </div>
+</div>

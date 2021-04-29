@@ -10,7 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_21_080223) do
+ActiveRecord::Schema.define(version: 2021_04_27_115307) do
+
+  create_table "hotels", charset: "utf8mb4", force: :cascade do |t|
+    t.string "hotel_name"
+    t.text "introduction"
+    t.string "tell"
+    t.string "room_id"
+    t.string "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "postcode"
+    t.integer "prefecture_code"
+    t.string "address_city"
+    t.string "address_street"
+    t.string "address_building"
+    t.string "email"
+    t.string "hotel_img"
+    t.index ["email"], name: "index_hotels_on_email", unique: true
+  end
+
+  create_table "rooms", charset: "utf8mb4", force: :cascade do |t|
+    t.string "room_name"
+    t.text "introduction"
+    t.integer "price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
