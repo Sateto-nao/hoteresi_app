@@ -1,0 +1,11 @@
+<% if !Like.exists?(user_id: current_user.id, room_id: room.id) %>
+  <%= link_to room_favorite_path(room.id), method: :post, remote: true, class:"like-btn" do %>
+    <i class="fas fa-star star-icon1"></i>
+  <% end %>
+  <span class="star-count1"><%= room.favorite.count %></span>
+<% else %>
+  <%= link_to room_like_path(room_id: room.id, id: room.favorite[0].id), method: :delete, remote: true, class:"like-btn" do %>
+    <i class="fas fa-star star-icon2"></i>
+  <% end %>
+  <span class="star-count2"><%= room.favorite.count %></span>
+<% end %>

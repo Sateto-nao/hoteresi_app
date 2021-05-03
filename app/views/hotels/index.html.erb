@@ -1,0 +1,22 @@
+<div class="container mt-5">
+  <% @hotels.each do |hotel| %>
+  <div class="card mb-3">
+    <div class="row no-gutters">
+      <div class="col-md-7">
+        <%= image_tag hotel.hotel_img.to_s, {width: "100%",  height: "300"} %>
+      </div>
+      <div class="col-md-5">
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to hotel.hotel_name, hotel_rooms_path(hotel_id: hotel.id) %></h5>
+          <p class="card-text">Address: 〒<%= hotel.postcode %></br><%= hotel.prefecture_name %><%= hotel.address_city %><%= hotel.address_street %></p>
+          <p class="card-text">Tell: <%= hotel.tell %></p>
+          <p class="card-text">Email: <%= hotel.email %></p>
+        </div>
+        <div class="text-right pr-2">
+          <small class="text-muted">Update: <%= hotel.updated_at.strftime('%Y/%m/%d') %></small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

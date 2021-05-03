@@ -1,25 +1,13 @@
 class Room < ApplicationRecord
+  validates :room_name, presence: true, length: {maximum: 30}
+  validates :introduction, length: {maximum: 300}
+  validates :price, presence: true
+  validates :user_id, presence: true
+  validates :hotel_id, presence: true
 
-  def index
-  end
-  def new
+  mount_uploader :room_img, RoomImageUploader
 
-  end
-
-  def create
-  
-  end
-
-  def show
-  end
-
-  def edit
-  end
-
-  def updated
-  end
-
-  def destroy
-  end
-
+  belongs_to :hotel
+  belongs_to :user
+  has_many :favorites, dependent: :destroy
 end

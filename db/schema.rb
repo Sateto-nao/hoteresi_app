@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_27_115307) do
+ActiveRecord::Schema.define(version: 2021_05_02_233711) do
+
+  create_table "favorites", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_favorites_on_room_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
 
   create_table "hotels", charset: "utf8mb4", force: :cascade do |t|
     t.string "hotel_name"
@@ -36,6 +45,9 @@ ActiveRecord::Schema.define(version: 2021_04_27_115307) do
     t.integer "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "hotel_id"
+    t.string "user_id"
+    t.string "room_img"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
@@ -57,4 +69,6 @@ ActiveRecord::Schema.define(version: 2021_04_27_115307) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "favorites", "rooms"
+  add_foreign_key "favorites", "users"
 end

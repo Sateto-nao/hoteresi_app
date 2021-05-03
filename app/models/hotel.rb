@@ -24,4 +24,6 @@ class Hotel < ApplicationRecord
   validates :address_building, presence: true, uniqueness: true
 
   belongs_to :user
+  has_many :rooms, dependent: :destroy
+   accepts_nested_attributes_for :rooms
 end
