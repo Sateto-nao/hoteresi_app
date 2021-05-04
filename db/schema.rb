@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_02_233711) do
+ActiveRecord::Schema.define(version: 2021_05_03_235942) do
 
   create_table "favorites", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -22,46 +22,46 @@ ActiveRecord::Schema.define(version: 2021_05_02_233711) do
   end
 
   create_table "hotels", charset: "utf8mb4", force: :cascade do |t|
-    t.string "hotel_name"
+    t.string "hotel_name", limit: 255
     t.text "introduction"
-    t.string "tell"
-    t.string "room_id"
-    t.string "user_id"
+    t.string "tell", limit: 255
+    t.string "room_id", limit: 255
+    t.string "user_id", limit: 255
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "postcode"
     t.integer "prefecture_code"
-    t.string "address_city"
-    t.string "address_street"
-    t.string "address_building"
-    t.string "email"
-    t.string "hotel_img"
+    t.string "address_city", limit: 255
+    t.string "address_street", limit: 255
+    t.string "address_building", limit: 255
+    t.string "email", limit: 255
+    t.string "hotel_img", limit: 255
     t.index ["email"], name: "index_hotels_on_email", unique: true
   end
 
   create_table "rooms", charset: "utf8mb4", force: :cascade do |t|
-    t.string "room_name"
+    t.string "room_name", limit: 255
     t.text "introduction"
     t.integer "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "hotel_id"
-    t.string "user_id"
-    t.string "room_img"
+    t.string "hotel_id", limit: 255
+    t.string "user_id", limit: 255
+    t.string "room_img", limit: 255
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
+    t.string "email", limit: 255, default: "", null: false
+    t.string "encrypted_password", limit: 255, default: "", null: false
+    t.string "reset_password_token", limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
-    t.string "name"
+    t.string "current_sign_in_ip", limit: 255
+    t.string "last_sign_in_ip", limit: 255
+    t.string "name", limit: 255
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.date "birthday"
