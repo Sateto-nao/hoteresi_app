@@ -11,11 +11,12 @@ Rails.application.routes.draw do
     get :favorites, on: :collection
   end
 
+  resources :rooms, :only => [:index]
   resources :hotels do
+    collection do
+      get 'search'
+    end
     resources :rooms do
-      collection do
-        get 'search'
-      end
       resource :favorites, only: [:create, :destroy]
     end
   end

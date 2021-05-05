@@ -10,7 +10,9 @@ RUN mkdir /hoteresi_app
 WORKDIR /hoteresi_app
 COPY Gemfile /hoteresi_app/Gemfile
 COPY Gemfile.lock /hoteresi_app/Gemfile.lock
+RUN gem install bundler -v 2.0.1
 RUN bundle install
+RUN apt install -y graphviz
 COPY . /hoteresi_app
 
 RUN yarn install --check-files

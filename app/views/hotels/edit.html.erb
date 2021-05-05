@@ -1,8 +1,24 @@
-<div class="container mt-5">
+<div class="container">
+  <div class="card">
+    <%= image_tag @hotel.hotel_img.to_s, {width: "100%",  height: "450"} %>
+    <div class="card-body">
+      <h5 class="card-title"><%= @hotel.hotel_name %></h5>
+      <p class="card-text">Address: 〒<%= @hotel.postcode %></br><%= @hotel.prefecture_name %><%= @hotel.address_city %><%= @hotel.address_street %></p>
+      <p class="card-text text-right">Tell: <%= @hotel.tell %></p>
+      <p class="card-text text-right">Email: <%= @hotel.email %></p>
+      <p class="card-text text-muted">Hotel message</p>
+      <p class="card-text"><%= @hotel.introduction %></p>
+      <p class="card-text"><%= current_user.id %></p>
+    </div>
+    <div class="text-right pr-2">
+      <%= link_to "削除", hotel_path(@hotel.id), method: :delete, data: {confirm: "削除しますか？"}, class: "btn btn-link" %>
+      <p><small class="text-muted">Update: <%= @hotel.updated_at.strftime('%Y/%m/%d') %></small></p>
+    </div>
+  </div>
   <%= form_for @hotel do |f| %>
   <%= render 'layouts/error_message', model: f.object %>
   <form>
-    <div class="form-row">
+    <div class="form-row mt-5">
       <div class="form-group col-md-4">
         <%= f.label :hotel_name, "ホテル名" %>
         <%= f.text_field :hotel_name, {class: "form-control"} %>
@@ -23,7 +39,7 @@
       </div>
       <div class="form-group col-md-3">
         <%= f.label :prefecture_code, "都道府県" %>
-        <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {prompt: "都道府県"}, {class: "form-control"} %>
+        <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :name, :name, {prompt: "都道府県"}, {class: "form-control"} %>
       </div>
     </div>
     <div class="form-row">
@@ -50,7 +66,7 @@
         <%= f.file_field :hotel_img, {class: "form-control-file"} %>
       </div>
     </div>
-    <button type="submit" class="btn btn-outline-primary">Registration</button>
+    <%= f.submit "Registration", class: "btn btn-outline-primary" %>
   </form>
   <% end %>
 </div>

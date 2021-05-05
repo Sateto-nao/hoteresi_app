@@ -1,7 +1,17 @@
 class HotelsController < ApplicationController
 
+  before_action :set_hotel, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  # before_action :ensure_current_user, only: [:edit, :update, :destroy]
+
   def index
-    @hotels = Hotel.all
+    @q = Hotel.ransack(params[:q])
+    @hotels = @q.result(distinct: true)
+  end
+
+  def search
+    @q = Hotel.ransack(params[:q]).to_i
+    @hotels = @q.result(distinct: true)
   end
 
   def new
@@ -9,8 +19,7 @@ class HotelsController < ApplicationController
   end
 
   def create
-    @hotel = Hotel.new(params.require(:hotel).permit(:hotel_name, :introduction, :tell, :email, :user_id, :postcode,:prefecture_code, :address_city, :address_street, :address_building, :hotel_img))
-    if @hotel.save
+    if Hotel.create(hotel_params)
       flash[:notice] = "ホテル情報を登録しました"
       redirect_to controller: :hotels, action: :show, id: @hotel.id
     else
@@ -18,18 +27,17 @@ class HotelsController < ApplicationController
     end
   end
 
+
   def show
     @hotel = Hotel.find(params[:id])
     @rooms = Room.all.includes(:hotels)
   end
 
   def edit
-    @hotel = Hotel.find(params[:id])
   end
 
   def update
-    @hotel = Hotel.find(params[:id])
-    if @hotel.update(params.require(:hotel).permit(:hotel_name, :introduction, :tell, :email, :user_id, :postcode,:prefecture_code, :address_city, :address_street, :address_building, :hotel_img))
+    if @hotel.update(hotel_params)
       flash[:notice] = "ホテル情報を変更しました"
       redirect_to controller: :hotels, action: :show, id: @hotel.id
     else
@@ -38,6 +46,26 @@ class HotelsController < ApplicationController
   end
 
   def destroy
+    if hotel.user_id == current_user.id
+      flash[:notice] = "ホテル情報を削除しました"
+      hotel.destroy
+    end
+  end
 
+  private
+  def hotel_params
+    params.require(:hotel).permit(:hotel_name, :introduction, :tell, :email, :user_id, :postcode,:prefecture_code, :address_city, :address_street, :address_building, :hotel_img)
+  end
+
+  def set_hotel
+    @hotel = Hotel.find(params[:id])
+  end
+
+  def ensure_current_user
+    @hotel = Hotel.find(params[:id])
+    if current_user.id != @hotel.user_id.to_i
+      flash[:notice]="権限がありません"
+      redirect_to("/")
+    end
   end
 end

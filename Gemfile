@@ -46,9 +46,9 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'pry-doc'
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'rails-erd'
 end
 
 group :test do
@@ -73,3 +73,5 @@ gem 'jp_prefecture', '~>1.0.0'
 gem 'dotenv-rails'
 gem 'carrierwave'
 gem 'rmagick'
+gem 'jquery-rails'
+gem 'geocoder'

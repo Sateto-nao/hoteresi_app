@@ -1,15 +1,17 @@
-<div class="card mb-3">
-  <div class="row no-gutters">
-    <div class="col-md-7">
-      <%= image_tag "/uploads/room/room_img/#{@room.id}", {width: "100%",  height: "300"} %>
-    </div>
-    <div class="col-md-5">
-      <div class="card-body">
-        <h5 class="card-title"><%=  @room.room_name %></h5>
+<div class="container">
+  <div class="card mb-3">
+    <div class="row no-gutters">
+      <div class="col-md-7">
+        <%= image_tag @room.room_img.to_s, {width: "100%",  height: "300"} %>
       </div>
-      <div class="text-right pr-2">
-        <small class="text-muted">Update: <%= @room.updated_at.strftime('%Y/%m/%d') %></small>
+      <div class="col-md-5">
+        <div class="card-body">
+          <h5 class="card-title"><%= @room.room_name %></h5>
+        </div>
+        <div class="text-right pr-2">
+          <small class="text-muted">Update: <%= @room.updated_at.strftime('%Y/%m/%d') %></small>
+        </div>
       </div>
     </div>
   </div>
-</div>s
+</div>

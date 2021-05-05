@@ -1,4 +1,15 @@
 <div class="container mt-5">
+  <form class="form-row form-group">
+    <%= search_form_for @q, url: search_hotels_path  do |f| %>
+    <div class="col-6">
+      <%= f.search_field :hotel_name_or_prefecture_code_or_address_city_cont, placeholder: "search", class: 'form-control mr-sm-2' %>
+        <%= f.collection_select :prefecture_code_cont, JpPrefecture::Prefecture.all, :name, :name, {prompt: "エリア"}, {class: "form-control"} %>
+    </div>
+    <div class="col">
+      <%= f.submit "search", class: "btn btn-outline-success my-2 my-sm-0" %>
+    </div>
+    <% end %>
+  </form>
   <% @hotels.each do |hotel| %>
   <div class="card mb-3">
     <div class="row no-gutters">
@@ -7,8 +18,8 @@
       </div>
       <div class="col-md-5">
         <div class="card-body">
-          <h5 class="card-title"><%= link_to hotel.hotel_name, hotel_rooms_path(hotel_id: hotel.id) %></h5>
-          <p class="card-text">Address: 〒<%= hotel.postcode %></br><%= hotel.prefecture_name %><%= hotel.address_city %><%= hotel.address_street %></p>
+          <h5 class="card-title"><%= link_to hotel.hotel_name, hotel_path(id: hotel.id) %></h5>
+          <p class="card-text">Address: 〒<%= hotel.postcode %></br><%= hotel.prefecture_code %><%= hotel.address_city %><%= hotel.address_street %></p>
           <p class="card-text">Tell: <%= hotel.tell %></p>
           <p class="card-text">Email: <%= hotel.email %></p>
         </div>

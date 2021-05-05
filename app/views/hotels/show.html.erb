@@ -3,15 +3,13 @@
     <%= image_tag @hotel.hotel_img.to_s, {width: "100%",  height: "450"} %>
     <div class="card-body">
       <h5 class="card-title"><%= @hotel.hotel_name %></h5>
-      <p class="card-text">Address: 〒<%= @hotel.postcode %></br><%= @hotel.prefecture_name %><%= @hotel.address_city %><%= @hotel.address_street %></p>
+      <p class="card-text">Address: 〒<%= @hotel.postcode %></br><%= @hotel.prefecture_code %><%= @hotel.address_city %><%= @hotel.address_street %></p>
       <p class="card-text text-right">Tell: <%= @hotel.tell %></p>
       <p class="card-text text-right">Email: <%= @hotel.email %></p>
       <p class="card-text text-muted">Hotel message</p>
       <p class="card-text"><%= @hotel.introduction %></p>
     </div>
     <div class="text-right pr-2">
-      <%= link_to "edit", edit_hotel_path(@hotel.id), class: "btn btn-link" %>
-      <%= link_to "room登録", new_hotel_room_path(@hotel.id), class: "btn btn-link" %>
       <p><small class="text-muted">Update: <%= @hotel.updated_at.strftime('%Y/%m/%d') %></small></p>
     </div>
   </div>
@@ -24,7 +22,7 @@
         </div>
         <div class="col-md-5">
           <div class="card-body">
-            <h5 class="card-title"><%=  room.room_name %></h5>
+            <h5 class="card-title"><%= link_to room.room_name, hotel_room_path(hotel_id: room.hotel_id, id: room.id)%></h5>
           </div>
           <div class="text-right pr-2">
             <small class="text-muted">Update: <%= room.updated_at.strftime('%Y/%m/%d') %></small>
