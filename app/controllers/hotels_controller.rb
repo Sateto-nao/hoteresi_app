@@ -9,17 +9,14 @@ class HotelsController < ApplicationController
     @hotels = @q.result(distinct: true)
   end
 
-  def search
-    @q = Hotel.ransack(params[:q]).to_i
-    @hotels = @q.result(distinct: true)
-  end
-
   def new
     @hotel = Hotel.new
   end
 
   def create
-    if Hotel.create(hotel_params)
+    @hotel = Hotel.new(hotel_params)
+    @hotel.address = @hotel.prefecture_code + @hotel.address_city + @hotel.address_street
+    if @hotel.save
       flash[:notice] = "ホテル情報を登録しました"
       redirect_to controller: :hotels, action: :show, id: @hotel.id
     else
@@ -30,6 +27,7 @@ class HotelsController < ApplicationController
 
   def show
     @hotel = Hotel.find(params[:id])
+    gon.hotel = @hotel
     @rooms = Room.all.includes(:hotels)
   end
 
@@ -37,7 +35,9 @@ class HotelsController < ApplicationController
   end
 
   def update
-    if @hotel.update(hotel_params)
+    @hotel.update(hotel_params)
+    @hotel.address = @hotel.prefecture_code + @hotel.address_city + @hotel.address_street
+    if @hotel.save
       flash[:notice] = "ホテル情報を変更しました"
       redirect_to controller: :hotels, action: :show, id: @hotel.id
     else
@@ -54,8 +54,9 @@ class HotelsController < ApplicationController
 
   private
   def hotel_params
-    params.require(:hotel).permit(:hotel_name, :introduction, :tell, :email, :user_id, :postcode,:prefecture_code, :address_city, :address_street, :address_building, :hotel_img)
+    params.require(:hotel).permit(:hotel_name, :introduction, :tell, :email, :user_id, :postcode, :prefecture_code, :address_city, :address_street, :address_building, :hotel_img, :address)
   end
+
 
   def set_hotel
     @hotel = Hotel.find(params[:id])

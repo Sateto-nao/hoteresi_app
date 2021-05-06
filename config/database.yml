@@ -14,13 +14,13 @@ default: &default
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password: password
+  password: <%= ENV["HOTERESI_APP_DATABASE_PASSWORD"] %>
   host: localhost
 
 development:
   <<: *default
   username: root
-  password: password
+  password: <%= ENV["HOTERESI_APP_DATABASE_PASSWORD"] %>
   host: db
   database: hoteresi_app_development
 
@@ -30,7 +30,7 @@ development:
 test:
   <<: *default
   username: root
-  password: password
+  password: <%= ENV["HOTERESI_APP_DATABASE_PASSWORD"] %>
   host: db
   database: hoteresi_app_test
 

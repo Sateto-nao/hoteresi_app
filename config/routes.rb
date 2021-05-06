@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'reserve/new'
   root to: 'home#top'
   get 'about', to: 'home#about'
 
@@ -13,9 +14,6 @@ Rails.application.routes.draw do
 
   resources :rooms, :only => [:index]
   resources :hotels do
-    collection do
-      get 'search'
-    end
     resources :rooms do
       resource :favorites, only: [:create, :destroy]
     end

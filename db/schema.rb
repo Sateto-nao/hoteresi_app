@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_05_142651) do
+ActiveRecord::Schema.define(version: 2021_05_06_110033) do
 
   create_table "favorites", charset: "utf8mb4", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -36,7 +36,22 @@ ActiveRecord::Schema.define(version: 2021_05_05_142651) do
     t.string "address_building", limit: 255
     t.string "email", limit: 255
     t.string "hotel_img", limit: 255
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address"
     t.index ["email"], name: "index_hotels_on_email", unique: true
+  end
+
+  create_table "reserves", charset: "utf8mb4", force: :cascade do |t|
+    t.string "user_id"
+    t.string "room_id"
+    t.string "group"
+    t.integer "price"
+    t.date "view"
+    t.date "start_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "notes"
   end
 
   create_table "rooms", charset: "utf8mb4", force: :cascade do |t|

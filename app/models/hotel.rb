@@ -11,6 +11,11 @@ class Hotel < ApplicationRecord
     self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
 
+
+
+  geocoded_by :address
+  after_validation :geocode
+
   mount_uploader :hotel_img, HotelImageUploader
   before_save { self.email = email.downcase }
 
@@ -19,6 +24,7 @@ class Hotel < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, {presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }}
   validates :introduction, length: {maximum: 300}
+  validates :address, presence: true
   validates :postcode, presence: true
   validates :prefecture_code, presence: true
   validates :address_city, presence: true
@@ -27,5 +33,5 @@ class Hotel < ApplicationRecord
 
   belongs_to :user
   has_many :rooms, dependent: :destroy
-   accepts_nested_attributes_for :rooms
+  accepts_nested_attributes_for :rooms
 end

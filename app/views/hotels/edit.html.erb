@@ -8,7 +8,6 @@
       <p class="card-text text-right">Email: <%= @hotel.email %></p>
       <p class="card-text text-muted">Hotel message</p>
       <p class="card-text"><%= @hotel.introduction %></p>
-      <p class="card-text"><%= current_user.id %></p>
     </div>
     <div class="text-right pr-2">
       <%= link_to "削除", hotel_path(@hotel.id), method: :delete, data: {confirm: "削除しますか？"}, class: "btn btn-link" %>
