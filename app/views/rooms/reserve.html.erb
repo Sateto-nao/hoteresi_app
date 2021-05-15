@@ -1,0 +1,90 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card shadow-sm mb-3">
+        <%= image_tag @room.room_img.to_s, {width: "100%", class: "img-fluid"}  %>
+        <div class="card-body p-5">
+          <h5 class="card-title"><%= @room.hotel.hotel_name %> / <%= @room.room_name %></h5>
+          <p class="card-text text-muted">
+            <%= safe_join(@room.introduction.split("\n"),tag(:br)) %>
+          </p>
+          <h5 class="card-text text-md-right">
+            最大人数: ￥<%= @room.group %>人
+          </h5>
+          <h5 class="card-text text-md-right">
+            <% if @room.smoke == "1" %>
+            禁煙
+            <% else %>
+            喫煙可
+            <% end %>
+          </h5>
+          <h5 class="card-text text-md-right">賃料: ￥<%= @room.price %></h5>
+          <div class="text-right pr-2">
+            <small class="text-muted">Update: <%= @room.updated_at.strftime('%Y/%m/%d') %></small>
+          </div>
+          <div class="text-right mt-2">
+            <%= link_to "Back", :back, {class: "btn btn-link"} %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <%= form_for @reserve do |f| %>
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <%= f.label :contact_id, "お問い合わせ内容" %>
+            <%= f.collection_select :contact_id, Contact.all, :id, :name, {include_blank: '選択して下さい'}, {class: 'form-control'} %>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <%= f.label :how_preview, "希望の内見方法" %>
+            <%= f.select :how_preview, {'オンライン内見': "オンライン内見", '来館内見': "来館内見"},{ include_blank: '選択してください'},  {class: "form-control"} %>
+          </div>
+          <div class="form-group col-md-6">
+            <%= f.label :how_contract, "希望の契約方法" %>
+            <%= f.select :how_contract, {'オンライン契約': "オンライン契約", '来館契約': "来館契約"},{ include_blank: '選択してください'},  {class: "form-control"} %>
+          </div>
+        </div>
+        <div>
+          <%= f.label :preview, "希望の内見日" %>
+        </div>
+        <div class="form-group form-inline">
+          <%= f.date_select :preview, {include_blank: true, start_year: Time.now.year, end_year: (Time.now.year + 1)}, {class: "col-4 col-md-3 form-inline form-control"} %>
+        </div>
+        <div>
+          <%= f.label :preview, "希望の説明日" %>
+        </div>
+        <div class="form-group form-inline">
+          <%= f.date_select :preview, {include_blank: true}, {class: "col-4 col-md-3 form-inline form-control"} %>
+        </div>
+        <div>
+          <%= f.label :start_date, "希望の居住日" %>
+        </div>
+        <div class="form-group form-inline">
+          <%= f.date_select :start_date, {include_blank: true} , {class: "col-4 col-md-3 form-inline form-control"} %>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <%= f.label :group, "居住人数" %>
+            <%= f.select :group, {'1人': 1, '2人': 2, '3人': 3, '4人': 4, '5人': 5, '6人': 6, '7人': 7, '8人': 8, '9人': 9, '10人': 10}, { include_blank: '選択してください'}, { class: 'form-control' } %>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-12">
+            <%= f.label :notes, "備考欄(具体的なお問い合わせ内容)" %>
+            <%= f.text_area :notes, {id: "input-text", class: "form-control", rows: "10"} %>
+            <p id="counter"></p>
+          </div>
+        </div>
+        <div class="text-right">
+          <%= f.submit "予約", class: "btn btn-outline-primary" %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.hidden_field :room_id, value: @room.id %>
+        </div>
+      </form>
+      <% end %>
+    </div>
+  </div>
+</div>

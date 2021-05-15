@@ -1,22 +1,29 @@
 Rails.application.routes.draw do
 
-  get 'reserve/new'
+
+  get 'reserves/show'
   root to: 'home#top'
   get 'about', to: 'home#about'
+  get 'rooms/search', to: 'rooms#search'
+  get 'rooms/:id/reserve', to: 'rooms#reserve'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
   resources :users, :only => [:show] do
-    get :favorites, on: :collection
-  end
-
-  resources :rooms, :only => [:index]
-  resources :hotels do
-    resources :rooms do
-      resource :favorites, only: [:create, :destroy]
+    collection do
+      get :favorites
+      get '/:id/myhotels', to: 'users#myhotels'
+      get '/:id/myhotel/:hotel_id/myrooms', to: 'users#myrooms'
     end
   end
-end
-# For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+    resources :hotels, except: [:show] do
+      resources :rooms do
+        resource :favorites, only: [:create, :destroy]
+      end
+    end
+    resources :reserves
+  end
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

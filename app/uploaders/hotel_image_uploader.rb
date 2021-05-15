@@ -1,7 +1,7 @@
 class HotelImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -20,7 +20,8 @@ class HotelImageUploader < CarrierWave::Uploader::Base
   #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
-  # process :resize_to_limit => [700, 700]
+  process resize_to_fill: [1600, 900, "center"]
+
 
   # Process files as they are uploaded:
   # process scale: [200, 300]
@@ -30,9 +31,9 @@ class HotelImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process resize_to_fit: [200, 200]
-  # end
+  version :thumb do
+    process resize_to_fill: [800, 450, "center"]
+  end
 
 
   # Add an allowlist of extensions which are allowed to be uploaded.

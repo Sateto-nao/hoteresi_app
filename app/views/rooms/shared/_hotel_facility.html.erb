@@ -1,0 +1,8 @@
+<div class="card bg-white shadow-sm">
+  <div class="card-header">
+    <h5 class="text-muted">ホテル設備</h5>
+  </div>
+  <div class="card-body">
+    <p class="text"><%= safe_join(hotel.facility.split("\n"),tag(:br)) %></p>
+  </div>
+</div>

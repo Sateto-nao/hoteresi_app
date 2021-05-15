@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <%= form_for @hotel do |f| %>
-  <%= render 'layouts/error_message', model: f.object %>
+  <%= render 'layouts/shared/error_message', model: f.object %>
   <form>
     <div class="form-row">
       <div class="form-group col-md-4">
@@ -23,7 +23,7 @@
       </div>
       <div class="form-group col-md-3">
         <%= f.label :prefecture_code, "都道府県" %>
-        <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :name, :name, {prompt: "都道府県"}, {class: "form-control"} %>
+        <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {prompt: "都道府県"}, {class: "form-control"} %>
       </div>
     </div>
     <div class="form-row">
@@ -42,16 +42,45 @@
     </div>
     <div class="row">
       <div class="form-group col-md-6">
-        <%= f.label :introduction, "ホテル紹介文" %>
-        <%= f.text_area :introduction, {class: "form-control", rows: "5"} %>
+        <%= f.label :introduction, "交通アクセス / ホテル紹介文" %>
+        <%= f.text_area :introduction, {id: "input-string", class: "form-control", rows: "5"} %>
+        <p id="counter-str"></p>
       </div>
       <div class="form-group col-md-4">
         <%= f.label :hotel_img, "ホテル画像" %>
         <%= f.file_field :hotel_img, {class: "form-control-file"} %>
       </div>
     </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <%= f.label :facility, "施設、設備 / 周辺情報など" %>
+        <%= f.text_area :facility, {id: "input-text", class: "form-control", rows: "10"} %>
+        <p id="counter"></p>
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :parking, "駐車場" %>
+        <%= f.select :parking, {'有':'1', '無':'2'}, { include_blank: '選択してください'}, { class: 'form-control' , required: true } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-4">
+        <%= f.label :preview, "オンライン内見*1" %>
+        <%= f.select :preview, {'オンライン内見可':'1', 'オンライン内見不可':'2'}, { include_blank: '選択してください'}, { class: 'form-control' , required: true } %>
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :contract, "オンライン契約*2" %>
+        <%= f.select :contract, {'オンライン契約可':'1', 'オンライン契約不可':'2'}, { include_blank: '選択してください'}, { class: 'form-control' , required: true } %>
+      </div>
+    </div>
     <%= f.submit "Registration", class: "btn btn-outline-primary" %>
     <%= f.hidden_field :user_id, value: current_user.id %>
   </form>
   <% end %>
+  <div class="text-right pr-2">
+    <small class="text-muted">*1: オンライン内見は実際にスタッフがスマホなどでお客様と通信しながら館内・部屋を映してホテルの案内をすることです。</small>
+  </div>
+  <div class="text-right pr-2">
+    <small class="text-muted">*2: オンライン契約はビデオ通信にて、お客様に重要事項説明を行うことです。来館することなくお客様に契約していただけます。</small>
+  </div>
 </div>
+<%= javascript_pack_tag 'form/application' %>

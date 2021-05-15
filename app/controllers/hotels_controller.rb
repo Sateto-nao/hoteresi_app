@@ -1,8 +1,7 @@
 class HotelsController < ApplicationController
-
   before_action :set_hotel, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  # before_action :ensure_current_user, only: [:edit, :update, :destroy]
+  before_action :ensure_current_user, only: [:edit, :update, :destroy]
 
   def index
     @q = Hotel.ransack(params[:q])
@@ -15,31 +14,25 @@ class HotelsController < ApplicationController
 
   def create
     @hotel = Hotel.new(hotel_params)
-    @hotel.address = @hotel.prefecture_code + @hotel.address_city + @hotel.address_street
+    @hotel.address = @hotel.prefecture_name + @hotel.address_city + @hotel.address_street
     if @hotel.save
       flash[:notice] = "ホテル情報を登録しました"
-      redirect_to controller: :hotels, action: :show, id: @hotel.id
+      redirect_to controller: :rooms, action: :index, hotel_id: @hotel.id
     else
       render :new
     end
   end
 
 
-  def show
-    @hotel = Hotel.find(params[:id])
-    gon.hotel = @hotel
-    @rooms = Room.all.includes(:hotels)
-  end
-
   def edit
   end
 
   def update
     @hotel.update(hotel_params)
-    @hotel.address = @hotel.prefecture_code + @hotel.address_city + @hotel.address_street
+    @hotel.address = @hotel.prefecture_name + @hotel.address_city + @hotel.address_street
     if @hotel.save
       flash[:notice] = "ホテル情報を変更しました"
-      redirect_to controller: :hotels, action: :show, id: @hotel.id
+      redirect_to controller: :rooms, action: :index, hotel_id: @hotel.id
     else
       render :edit
     end
@@ -54,7 +47,7 @@ class HotelsController < ApplicationController
 
   private
   def hotel_params
-    params.require(:hotel).permit(:hotel_name, :introduction, :tell, :email, :user_id, :postcode, :prefecture_code, :address_city, :address_street, :address_building, :hotel_img, :address)
+    params.require(:hotel).permit(:hotel_name, :introduction, :tell, :email, :user_id, :postcode, :prefecture_code, :address_city, :address_street, :address_building, :hotel_img, :address, :facility, :preview, :contract, :parking)
   end
 
 

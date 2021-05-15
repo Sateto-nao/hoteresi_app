@@ -1,0 +1,27 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <% @reserves.each do |reserve| %>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <h5 class="card-title"><%= @room.room_name %> / 問い合わせ ID:<%= reserve.id %></h5>
+              <p class="card-text">お問い合わせ内容 : <span class="text-muted font-weight-bold"><%= reserve.contact.name %></p>
+                <p class="card-text">
+                  契約について: <%= reserve.how_contract %> <%= reserve.contract %><br>
+                  内見について: <%= reserve.how_preview %> <%= reserve.preview %><br>
+                  希望入居日: <%= reserve.start_date %><br>
+                  入居人数: <%= reserve.group %><br>
+                </p>
+              </div>
+              <div class="col-6">
+                <p class="card-text">備考<br><%= reserve.notes %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>

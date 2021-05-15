@@ -1,0 +1,24 @@
+<div class="card bg-white shadow-sm">
+  <div class="card-header">
+    <h5 class="text-muted">その他情報</h5>
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      <% if hotel.preview == "1" %>
+        オンライン内見可
+      <% else %>
+        オンライン内見不可
+      <% end %><br>
+      <% if hotel.contract == "1" %>
+        オンライン契約可
+      <% else %>
+        オンライン契約不可
+      <% end %><br>
+      <% if hotel.parking == "1" %>
+        駐車場:有
+      <% else %>
+        駐車場:無
+      <% end %>
+    </p>
+  </div>
+</div>

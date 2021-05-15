@@ -1,21 +1,72 @@
 <div class="container">
-  <div class="col-12 mt-5">
-    <% @rooms.each do |room| %>
-    <div class="card mb-3">
-      <div class="row no-gutters">
-        <div class="col-md-7">
-          <%= image_tag room.room_img.to_s, {width: "100%",  height: "300"} %>
-        </div>
-        <div class="col-md-5">
-          <div class="card-body">
-            <h5 class="card-title"><%= link_to room.room_name, hotel_room_path(hotel_id: room.hotel_id, id: room.id)%></h5>
-          </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-3">
+        <%= image_tag @hotel.hotel_img.to_s, {width: "100%", class: "img-fluid"} %>
+        <div class="card-body p-5">
+          <h5 class="card-title"><%= @hotel.hotel_name %></h5>
+          <p class="card-text"><span class="text-muted">Address: 〒</span><%= @hotel.postcode.to_s.insert(3, "-") %></br><%= @hotel.prefecture_name %><%= @hotel.address_city %><%= @hotel.address_street %></p>
+          <p class="card-text text-md-right pr-2"><span class="text-muted">Tell: </span><%= @hotel.tell %></p>
+          <p class="card-text text-md-right pr-2"><span class="text-muted">Email: </span><%= @hotel.email %></p>
+          <h5 class="card-title">ホテル紹介/アクセス</h5>
+          <p class="card-text col-12 col-md-8"><%= safe_join(@hotel.introduction.split("\n"),tag(:br)) %></p>
           <div class="text-right pr-2">
-            <small class="text-muted">Update: <%= room.updated_at.strftime('%Y/%m/%d') %></small>
+            <p><small class="text-muted">Update: <%= @hotel.updated_at.strftime('%Y/%m/%d') %></small></p>
           </div>
         </div>
       </div>
     </div>
-    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-md-6 my-3">
+      <%= render 'rooms/shared/hotel_facility', hotel: @hotel %>
+    </div>
+    <div class="col-md-6">
+      <div class="card bg-white shadow-sm my-3">
+        <div class="card-header">
+          <h5 class="text-muted">ホテル位置</h5>
+        </div>
+        <div id='map'></div>
+      </div>
+      <%= render 'rooms/shared/hotel_etcinfo', hotel: @hotel %>
+    </div>
+  </div>
+  <style>#map{ height: 450px;}</style>
+  <script>
+    let map;
+    function initMap() {
+      geocoder = new google.maps.Geocoder()
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: gon.hotel.latitude, lng: gon.hotel.longitude },
+        zoom: 16,
+      });
+      marker = new google.maps.Marker({
+        position: { lat: gon.hotel.latitude, lng: gon.hotel.longitude },
+        map: map
+      });
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAP_API"] %>&callback=initMap" async defer></script>
+  <div class="row mt-3">
+    <div class="col-sm-3 d-none d-sm-block">
+      <%= render 'rooms/shared/room_side_search', q: @q %>
+    </div>
+    <div class="col-sm-9">
+      <%= render '/rooms/shared/room_search', q: @q%>
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h5 class="text-muted"><%= @hotel.hotel_name %>ルーム一覧</h5>
+        </div>
+        <div class="card-body">
+          <% if @hotel.rooms.blank? %>
+          <h5 class="text-muted">
+            ただいま準備中、ルームの登録はありません<br>
+            ご連絡はホテル電話、Emailにて受け付けております。
+          </h5>
+          <% end %>
+          <%= render 'rooms/shared/rooms_index', rooms: @rooms %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

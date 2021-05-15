@@ -1,35 +1,54 @@
 <div class="container mt-5">
-  <form class="form-row form-group">
-    <%= search_form_for @q do |f| %>
-    <div class="col-4">
-      <%= f.search_field :hotel_name_or_prefecture_code_or_address_city_cont, placeholder: "ホテル検索", class: 'form-control mr-sm-2' %>
+  <div class="row">
+    <div class="col-sm-3 d-none d-sm-block">
+      <%= render 'hotels/shared/hotel_side_search', hotel: @hotel %>
     </div>
-    <div class="form-inline">
-      <%= f.collection_select :prefecture_code_cont, JpPrefecture::Prefecture.all, :name, :name, {prompt: "エリア"}, {class: 'form-control'} %>
-    </div>
-    <div class="col">
-      <%= f.submit "search", class: "btn btn-outline-success my-2 my-sm-0" %>
-    </div>
-    <% end %>
-  </form>
-  <% @hotels.each do |hotel| %>
-  <div class="card mb-3">
-    <div class="row no-gutters">
-      <div class="col-md-7">
-        <%= image_tag hotel.hotel_img.to_s, {width: "100%",  height: "300"} %>
-      </div>
-      <div class="col-md-5">
-        <div class="card-body">
-          <h5 class="card-title"><%= link_to hotel.hotel_name, hotel_path(id: hotel.id) %></h5>
-          <p class="card-text">Address: 〒<%= hotel.postcode %></br><%= hotel.prefecture_code %><%= hotel.address_city %><%= hotel.address_street %></p>
-          <p class="card-text">Tell: <%= hotel.tell %></p>
-          <p class="card-text">Email: <%= hotel.email %></p>
+    <div class="col-sm-9">
+      <%= render 'hotels/shared/hotel_search', hotel: @hotel %>
+      <% @hotels.each do |hotel| %>
+      <div class="card mt-3 shadow-sm">
+        <div class="row no-gutters">
+          <div class="col-lg-7">
+            <%= link_to (image_tag hotel.hotel_img.to_s, {width: "100%",  height: "100%", class: "img-fluid"}), hotel_rooms_path(hotel_id: hotel.id) %>
+          </div>
+          <div class="col-lg-5 my-auto">
+            <div class="overflow-auto" style="width:100%; height:200px;">
+              <div class="card-body">
+                <div class="text-right">
+                  <small class="text-muted">下へスクロール</small>
+                </div>
+                <h6 class="card-title"><%= link_to hotel.hotel_name, hotel_rooms_path(hotel_id: hotel.id) %></h6>
+                <p class="card-text">Address: 〒<%= hotel.postcode.to_s.insert(3, "-") %><br>
+                  <%= hotel.prefecture_name %><%= hotel.address_city %><%= hotel.address_street %></p>
+                  <p class="card-text">
+                    <% if hotel.preview == "1" %>
+                    オンライン内見可
+                    <% else %>
+                    オンライン内見不可
+                    <% end %><br>
+                    <% if hotel.contract == "1" %>
+                    オンライン契約可
+                    <% else %>
+                    オンライン契約不可
+                    <% end %><br>
+                    <% if hotel.parking == "1" %>
+                    駐車場:有
+                    <% else %>
+                    駐車場:無
+                    <% end %>
+                  </p>
+                  <div class="card-text">
+                    <small class="text-muted"><%= hotel.introduction %></small>
+                  </div>
+                  <div class="text-right pr-2">
+                    <small class="text-muted">Update: <%= hotel.updated_at.strftime('%Y/%m/%d') %></small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="text-right pr-2">
-          <small class="text-muted">Update: <%= hotel.updated_at.strftime('%Y/%m/%d') %></small>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>
-  <% end %>
-</div>

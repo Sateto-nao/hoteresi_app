@@ -11,6 +11,9 @@ class Hotel < ApplicationRecord
     self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
 
+  def prefecture_name_e
+    JpPrefecture::Prefecture.find(name: prefecture_name).try(:name_e)
+  end
 
 
   geocoded_by :address
@@ -23,7 +26,11 @@ class Hotel < ApplicationRecord
   validates :tell, presence: true, uniqueness: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, {presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }}
-  validates :introduction, length: {maximum: 300}
+  validates :introduction, length: {maximum: 150}
+  validates :facility, length: {maximum: 500}
+  validates :preview, presence: true
+  validates :contract, presence: true
+  validates :parking, presence: true
   validates :address, presence: true
   validates :postcode, presence: true
   validates :prefecture_code, presence: true

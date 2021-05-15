@@ -1,0 +1,35 @@
+<div class="card shadow-sm mb-3">
+  <div class="card-header">
+    ホテル絞り込み
+  </div>
+  <div class="card-body">
+    <form class="form-row form-group mt-3">
+      <%= search_form_for @q do |f| %>
+      <div class="col-12">
+        <p class="text-muted mt-3">詳細検索:</p>
+        <div class="form-check-inline form-check m-2 mr-sm-2">
+          <%= f.check_box :preview_cont,{class: "form-check-input"}, "1", nil %>
+          <%= f.label :preview, " オンライン内見:可", class: "form-check-label" %>
+        </div>
+        <div class="form-check-inline form-check m-2 mr-sm-2">
+          <%= f.check_box :contract_cont,{class: "form-check-input"}, "1", nil %>
+          <%= f.label :contract, "オンライン契約:可", class: "form-check-label" %>
+        </div>
+        <div class="form-check-inline form-check m-2 mr-sm-2">
+          <%= f.check_box :parking_cont,{class: "form-check-input"}, "1", nil %>
+          <%= f.label :parking, " 駐車場:有", class: "form-check-label" %>
+        </div>
+      </div>
+      <div>
+        <small class="text-muted">*1: オンライン内見は実際にスタッフがスマホなどでお客様と通信しながら館内・部屋を映してホテルの案内をすることです。</small>
+      </div>
+      <div>
+        <small class="text-muted">*2: オンライン契約はビデオ通信にて、お客様に重要事項説明を行うことです。来館することなくお客様に契約していただけます。</small>
+      </div>
+      <div class="col text-right mt-3">
+        <%= f.submit "search", class: "btn btn-outline-success" %>
+      </div>
+      <% end %>
+    </form>
+  </div>
+</div>

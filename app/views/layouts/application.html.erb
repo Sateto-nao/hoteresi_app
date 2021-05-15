@@ -13,12 +13,12 @@
 </head>
 
 <body>
-  <%= render 'layouts/header' %>
+  <%= render 'layouts/shared/header' %>
   <main class="position">
-    <%= render 'layouts/flash' %>
+    <%= render 'layouts/shared/flash' %>
     <%= yield %>
   </main>
-  <%= render 'layouts/footer' %>
+  <%= render 'layouts/shared/footer' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </body>
 </html>

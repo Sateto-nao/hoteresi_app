@@ -1,0 +1,41 @@
+<div class="card shadow-sm mb-3">
+  <div class="card-header">
+    ルーム検索
+  </div>
+  <div class="card-body">
+    <form class="form-row form-group mt-3">
+      <%= search_form_for @q, url: rooms_search_path do |f| %>
+      <div class="col-12">
+        <div class="form-group col-12">
+          <%= f.search_field :room_name_or_amenity_or_introduction_cont, placeholder: "キーワードで検索", class: 'form-control' %>
+        </div>
+      </div>
+      <div class="col-12 d-sm-none">
+        <div class="form-group col-6">
+          <%= f.label :group, "人数" %>
+          <%= f.select :group_cont, {'1人': "1", '2人': "2", '3人': "3", '4人': "4", '5人': "5", '6人': "6", '7人': "7", '8人': "8", '9人': "9", '10人': "10"}, { include_blank: '選択してください'}, { class: 'form-control'} %>
+        </div>
+        <div class="form-group col-6">
+          <%= f.label :price, "価格" %>
+          <%= f.search_field :price_gteq, {placeholder: "¥ Min", class: 'form-control'} %>円以上
+          〜
+          <%= f.search_field :price_lt, {placeholder: "¥ Max", class: 'form-control'} %>円未満
+        </div>
+        <div class="form-group col-6">
+          <div class="form-check ">
+            <%= f.check_box :smoke_cont,{class: "form-check-input"}, "2", nil %>
+            <%= f.label :smoke, "喫煙可", class: "form-check-label" %>
+          </div>
+          <div class="form-check">
+            <%= f.check_box :smoke_cont,{class: "form-check-input"}, "1", nil %>
+            <%= f.label :smoke, "禁煙", class: "form-check-label" %>
+          </div>
+        </div>
+      </div>
+      <div class="col text-right mt-3">
+        <%= f.submit "search", class: "btn btn-outline-success" %>
+      </div>
+      <% end %>
+    </form>
+  </div>
+</div>

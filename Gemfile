@@ -35,6 +35,8 @@ group :development, :test do
   gem 'rubocop-airbnb'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'pry-byebug'
+  gem 'pry-rails'
 end
 
 group :development do
@@ -46,8 +48,6 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'pry-byebug'
-  gem 'pry-rails'
   gem 'rails-erd'
 end
 
@@ -63,16 +63,28 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # add gem
+# login
 gem "devise", git: "https://github.com/heartcombo/devise" # エラーが出たので解消されていそうなmaster branchを指定したらクリア
 gem 'devise-i18n'
 gem 'devise-i18n-views'
-gem 'omniauth-google-oauth2'
+
+# Environment variable
+gem 'dotenv-rails'
+
+# pagenation
 gem 'kaminari'
+
+# search
 gem 'ransack'
 gem 'jp_prefecture', '~>1.0.0'
-gem 'dotenv-rails'
+
+# image uploader
 gem 'carrierwave'
-gem 'rmagick'
-gem 'jquery-rails'
+gem 'mini_magick'
+
+# google map
 gem 'geocoder'
 gem 'gon'
+
+# DB seed
+gem 'seed-fu'

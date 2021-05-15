@@ -1,0 +1,18 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-3 d-none d-sm-block">
+      <%= render 'rooms/shared/room_side_search', q: @q %>
+    </div>
+    <div class="col-sm-9">
+      <%= render 'rooms/shared/room_search', q: @q %>
+      <div class="card shadow-sm">
+        <div class="card-header">
+          ルーム一覧
+        </div>
+        <div class="card-body">
+          <%= render 'rooms/shared/rooms_index', rooms: @rooms %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
