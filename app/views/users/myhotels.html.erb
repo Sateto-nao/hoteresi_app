@@ -8,10 +8,10 @@
         <%= render 'users/shared/header_menu', user: @user %>
         <div class="card-body">
           <% unless @user.hotels.blank? %>
-          <h4 class="text-left">マイホテル <%= link_to 'ホテル登録', new_hotel_path, {class: "btn btn-outline-primary"} %></h4>
+            <h4 class="text-left">マイホテル <%= link_to 'ホテル登録', new_hotel_path, {class: "btn btn-outline-primary"} %></h4>
           <% else %>
-          <h4>マイホテルはありません <%= link_to 'ホテル登録', new_hotel_path, {class: "btn btn-outline-primary"} %></h4>
-          <p class="text-muted">＊マイホテルは、ユーザーに提供するホテルを登録することで反映されます。<br>ホテルスタッフの方はボタンから登録してください。</p>
+            <h4>マイホテルはありません <%= link_to 'ホテル登録', new_hotel_path, {class: "btn btn-outline-primary"} %></h4>
+            <p class="text-muted">＊マイホテルは、ユーザーに提供するホテルを登録することで反映されます。<br>ホテルスタッフの方はボタンから登録してください。</p>
           <% end %>
           <% @user.hotels.each do |hotel| %>
           <div class="card my-3 shadow-sm">
@@ -52,9 +52,9 @@
                         <small class="text-muted">Update: <%= hotel.updated_at.strftime('%Y/%m/%d') %></small>
                       </div>
                       <% if current_user.id == @user.id %>
-                      <%= link_to "ホテル編集", edit_hotel_path(hotel.id), class:"pr-1" %>
-                      <%= link_to "ルーム登録", new_hotel_room_path(hotel.id), class:"pr-1" %>
-                      <%= link_to "ルーム一覧", "/users/#{@user.id}/myhotel/#{hotel.id}/myrooms", class:"pr-1" %>
+                        <%= link_to "ホテル編集", edit_hotel_path(hotel.id), class:"pr-1" %>
+                        <%= link_to "ルーム登録", new_hotel_room_path(hotel.id), class:"pr-1" %>
+                        <%= link_to "ルーム一覧", "/users/#{@user.id}/myhotel/#{hotel.id}/myrooms", class:"pr-1" %>
                       <% end %>
                     </div>
                   </div>

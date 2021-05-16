@@ -5,6 +5,7 @@ class ReservesController < ApplicationController
     @reserves.each do |reserve|
       @room = Room.find(reserve.room_id )
     end
+    @user = User.find(current_user.id)
   end
 
   def create

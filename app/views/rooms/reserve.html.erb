@@ -13,9 +13,9 @@
           </h5>
           <h5 class="card-text text-md-right">
             <% if @room.smoke == "1" %>
-            禁煙
+              禁煙
             <% else %>
-            喫煙可
+              喫煙可
             <% end %>
           </h5>
           <h5 class="card-text text-md-right">賃料: ￥<%= @room.price %></h5>
@@ -29,7 +29,8 @@
       </div>
     </div>
     <div class="col-md-6">
-      <%= form_for @reserve do |f| %>
+      <%= form_for @reserve, url: {controller: 'reserves', action: 'create' } do |f| %>
+      <%= render 'layouts/shared/error_message', model: f.object %>
       <form>
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -39,31 +40,31 @@
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <%= f.label :how_preview, "希望の内見方法" %>
+            <%= f.label :how_preview, "希望の内見方法(内見日を指定してください)" %>
             <%= f.select :how_preview, {'オンライン内見': "オンライン内見", '来館内見': "来館内見"},{ include_blank: '選択してください'},  {class: "form-control"} %>
           </div>
           <div class="form-group col-md-6">
-            <%= f.label :how_contract, "希望の契約方法" %>
+            <%= f.label :how_contract, "希望の契約方法(説明日を指定してください)" %>
             <%= f.select :how_contract, {'オンライン契約': "オンライン契約", '来館契約': "来館契約"},{ include_blank: '選択してください'},  {class: "form-control"} %>
           </div>
         </div>
         <div>
-          <%= f.label :preview, "希望の内見日" %>
+          <%= f.label :preview, "希望の内見日(3日以降の日程を指定してください)" %>
         </div>
         <div class="form-group form-inline">
           <%= f.date_select :preview, {include_blank: true, start_year: Time.now.year, end_year: (Time.now.year + 1)}, {class: "col-4 col-md-3 form-inline form-control"} %>
         </div>
         <div>
-          <%= f.label :preview, "希望の説明日" %>
+          <%= f.label :contaract, "希望の説明日" %>
         </div>
         <div class="form-group form-inline">
-          <%= f.date_select :preview, {include_blank: true}, {class: "col-4 col-md-3 form-inline form-control"} %>
+          <%= f.date_select :contract, {include_blank: true, start_year: Time.now.year, end_year: (Time.now.year + 1)}, {class: "col-4 col-md-3 form-inline form-control"} %>
         </div>
         <div>
-          <%= f.label :start_date, "希望の居住日" %>
+          <%= f.label :start_date, "希望の居住開始日" %>
         </div>
         <div class="form-group form-inline">
-          <%= f.date_select :start_date, {include_blank: true} , {class: "col-4 col-md-3 form-inline form-control"} %>
+          <%= f.date_select :start_date, {include_blank: true, start_year: Time.now.year, end_year: (Time.now.year + 1)} , {class: "col-4 col-md-3 form-inline form-control"} %>
         </div>
         <div class="row">
           <div class="form-group col-md-6">

@@ -22,9 +22,10 @@ class RoomsController < ApplicationController
   end
 
   def create
-    if Room.create(room_params)
+    @room = Room.new(room_params)
+    if @room.save
       flash[:notice] = "ルーム情報を登録しました"
-      redirect_to :index
+      redirect_to controller: :rooms, action: :index, hotel_id: @room.hotel_id
     else
       render :new
     end
@@ -39,7 +40,7 @@ class RoomsController < ApplicationController
   def update
     if @room.update(room_params)
       flash[:notice] = "ルーム情報を変更しました"
-      redirect_to controller: :rooms, action: :show, id: @room.id
+      redirect_to controller: :rooms, action: :index, hotel_id: @room.hotel_id
     else
       render :edit
     end
