@@ -45,8 +45,6 @@ CSSフレームワーク（Bootstrap4.6）
 # アプリ画面
 about
 <img src="https://user-images.githubusercontent.com/74028310/118610719-05614d00-b7f7-11eb-8c5c-2c9b4fc391d7.png" width="600">
-sign_up
-<img src="https://user-images.githubusercontent.com/74028310/118610719-05614d00-b7f7-11eb-8c5c-2c9b4fc391d7.png" width="600">
 ホテル詳細
 <img src="https://user-images.githubusercontent.com/74028310/118811461-01f9be80-b8e8-11eb-928b-127e7a9ae2ad.png" width="600">
 ルーム詳細
