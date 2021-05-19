@@ -88,3 +88,6 @@ gem 'gon'
 
 # DB seed
 gem 'seed-fu'
+
+# AWS
+gem 'fog-aws'

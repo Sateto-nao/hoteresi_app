@@ -22,7 +22,7 @@ Rails '6.1.3.1'
 
 # 導入技術
 
-プラットフォーム（Heroku）
+プラットフォーム（Heroku, AWS S3）
 データベース（MySQL）
 テスト（Rspec、Capybara、factory_bot）  *実装中
 自動テスト＆自動デプロイ（Circleci）    *実装中
@@ -31,10 +31,10 @@ CSSフレームワーク（Bootstrap4.6）
 ユーザー登録＆ログイン（devise )
 画像アップロード（carrierwave、mini_magick）
 お気に入り機能（Ajax）
-ページネーション（kaminari）            *実装中
+ページネーション（kaminari)
 検索（ransack）
 住所登録（jp_prefecture）
-郵便番号から自動入力（jquery.jpostal）
+郵便番号から自動入力（jquery.jpostal.js）
 マップ（geocoder, 補助としてgon）
 
 # コメント

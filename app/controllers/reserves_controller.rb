@@ -19,9 +19,7 @@ class ReservesController < ApplicationController
     end
   end
 
-  
   private
-
 
   def set_reserve
     @reserve = Reserve.find(params[:id])
