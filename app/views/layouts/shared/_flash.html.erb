@@ -1,17 +1,17 @@
 <% if flash[:notice] %>
-<div class="flash" role="alert">
+<div class="flash alert-primary" role="alert">
   <%= flash[:notice] %>
 </div>
 <% end %>
 
 <% if notice %>
-<div class="flash" role="alert">
+<div class="flash alert-primary" role="alert">
   <p class="notice"><%= notice %></p>
 </div>
 <% end %>
 
-<% if notice %>
-<div class="flash" role="alert">
+<% if alert %>
+<div class="flash alert-primary" role="alert">
   <p class="alert"><%= alert %></p>
 </div>
 <% end %>
