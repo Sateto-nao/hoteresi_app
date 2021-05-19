@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_15_052655) do
+ActiveRecord::Schema.define(version: 2021_05_18_001952) do
 
   create_table "contacts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"

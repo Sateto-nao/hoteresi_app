@@ -5,7 +5,7 @@ class HotelsController < ApplicationController
 
   def index
     @q = Hotel.ransack(params[:q])
-    @hotels = @q.result(distinct: true)
+    @hotels = @q.result(distinct: true).page(params[:page]).per(5).order('created_at DESC')
   end
 
   def new

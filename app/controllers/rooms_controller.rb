@@ -9,12 +9,12 @@ class RoomsController < ApplicationController
     gon.hotel = @hotel
     @rooms = Room.where(hotel_id: @hotel.id)
     @q = @rooms.ransack(params[:q])
-    @rooms = @q.result(distinct: true)
+    @rooms = @q.result(distinct: true).page(params[:page]).per(5).order('created_at DESC')
   end
 
   def search
     @q = Room.ransack(params[:q])
-    @rooms = @q.result(distinct: true)
+    @rooms = @q.result(distinct: true).page(params[:page]).per(5).order('created_at DESC')
   end
 
   def new

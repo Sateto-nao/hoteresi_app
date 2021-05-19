@@ -5,16 +5,21 @@ class UsersController < ApplicationController
   before_action :set_hotels
 
   def show
-    favorites = Favorite.where(user_id: current_user.id).pluck(:room_id)
-    @favorites = Room.find(favorites)
   end
 
   def myhotels
+    @hotels = Hotel.page(params[:page]).per(5).order('created_at DESC')
   end
 
   def myrooms
     @hotel = Hotel.find(params[:hotel_id])
-    @rooms = Room.where(hotel_id: @hotel.id)
+    @rooms = Room.where(hotel_id: @hotel.id).page(params[:page]).per(5).order('created_at DESC')
+  end
+
+  def favorites
+    favorites = Favorite.where(user_id: current_user.id).order(created_at: :desc).pluck(:room_id)
+    likerooms = Room.find(favorites)
+    @favorites = Kaminari.paginate_array(likerooms).page(params[:page]).per(5)
   end
 
 

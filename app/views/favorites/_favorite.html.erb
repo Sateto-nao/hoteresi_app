@@ -1,11 +1,13 @@
-<% if !Like.exists?(user_id: current_user.id, room_id: room.id) %>
-  <%= link_to room_favorite_path(room.id), method: :post, remote: true, class:"like-btn" do %>
-    <i class="fas fa-star star-icon1"></i>
+<% if !Favorite.exists?(user_id: current_user.id, room_id: room.id) %>
+  <%= link_to hotel_room_favorites_path(room_id: room.id, ), method: :post, remote: true, data: {"turbolinks" => false} do %>
+    <button type="button" class="btn btn-secondary">
+      LIKE登録 <span class="badge badge-light"><%= room.favorites.count %></span>
+    </button>
   <% end %>
-  <span class="star-count1"><%= room.favorite.count %></span>
 <% else %>
-  <%= link_to room_like_path(room_id: room.id, id: room.favorite[0].id), method: :delete, remote: true, class:"like-btn" do %>
-    <i class="fas fa-star star-icon2"></i>
+  <%= link_to hotel_room_favorites_path(room_id: room.id, id: room.favorites[0].id), method: :delete, remote: true, data: {"turbolinks" => false} do %>
+    <button type="button" class="btn btn-primary">
+      LIKE解除 <span class="badge badge-light"><%= room.favorites.count %></span>
+    </button>
   <% end %>
-  <span class="star-count2"><%= room.favorite.count %></span>
 <% end %>

@@ -56,4 +56,6 @@ class Reserve < ApplicationRecord
     contact_id == 4
   end
 
+  belongs_to :user
+
 end

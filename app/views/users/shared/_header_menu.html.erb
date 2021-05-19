@@ -6,7 +6,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <%= link_to "プロフィール", user_path(user.id), {class: "nav-item nav-link"} %>
-        <%= link_to "お気に入り", user_path(user.id), {class: "nav-link nav-item"} %>
+        <%= link_to "お気に入り",  "/users/#{user.id}/favorites", {class: "nav-link nav-item"} %>
         <%= link_to "お問い合わせ内容", reserves_path, {class: "nav-link nav-item"} %>
         <%= link_to "マイホテル", "/users/#{user.id}/myhotels", {class: "nav-link nav-item"} %>
       </div>

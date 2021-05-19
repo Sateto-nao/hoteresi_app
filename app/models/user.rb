@@ -10,6 +10,11 @@ class User < ApplicationRecord
   has_many :hotels, dependent: :destroy
   has_many :rooms
   has_many :favorites, dependent: :destroy
+  has_many :reserves, dependent: :destroy
+
+  def favorites_by?(room_id)
+    favorites.where(room_id: room_id).exists?
+  end
 
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|

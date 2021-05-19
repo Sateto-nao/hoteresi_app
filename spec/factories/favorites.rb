@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :favorite do
     user { nil }
-    room { nil }
+    hotel { nil }
   end
 end

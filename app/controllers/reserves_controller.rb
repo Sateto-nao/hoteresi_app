@@ -1,7 +1,7 @@
 class ReservesController < ApplicationController
 
   def index
-    @reserves = Reserve.where(user_id: current_user.id)
+    @reserves = Reserve.where(user_id: current_user.id).page(params[:page]).per(5).order('created_at DESC')
     @reserves.each do |reserve|
       @room = Room.find(reserve.room_id )
     end
@@ -19,6 +19,7 @@ class ReservesController < ApplicationController
     end
   end
 
+  
   private
 
 

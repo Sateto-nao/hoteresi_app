@@ -7,6 +7,11 @@
       <div class="card shadow-sm">
         <%= render 'users/shared/header_menu', user: @user %>
         <div class="card-body">
+          <% unless @reserve.blank? %>
+            <h4 class="text-left">お問い合わせ一覧</h4>
+          <% else %>
+            <h4>ルームのお問い合わせはこちらに表示されます</h4>
+          <% end %>
           <% @reserves.each do |reserve| %>
           <div class="card shadow-sm">
             <div class="card-body">
@@ -15,10 +20,10 @@
                   <h5 class="card-title"><%= @room.room_name %> / 問い合わせ ID:<%= reserve.id %></h5>
                   <p class="card-text">お問い合わせ内容: <span class="text-muted font-weight-bold"><%= reserve.contact.name %></p>
                     <p class="card-text">
-                      契約について: <%= reserve.how_contract %>希望説明日: <%= reserve.contract %><br>
-                      内見について: <%= reserve.how_preview %>希望内見日: <%= reserve.preview %><br>
-                      希望入居日: <%= reserve.start_date %><br>
-                      入居人数: <%= reserve.group %>人<br>
+                      契約について: <span class="text-muted font-weight-bold"><%= reserve.how_contract %></span> 日程: <span class="text-muted font-weight-bold"><%= reserve.contract %></span><br>
+                      内見について: <span class="text-muted font-weight-bold"><%= reserve.how_preview %></span> 日程: <span class="text-muted font-weight-bold"><%= reserve.preview %></span><br>
+                      希望入居日: <span class="text-muted font-weight-bold"><%= reserve.start_date %></span><br>
+                      入居人数: <span class="text-muted font-weight-bold"><%= reserve.group %>人</span><br>
                     </p>
                   </div>
                   <div class="col-6">
@@ -32,4 +37,5 @@
         </div>
       </div>
     </div>
+    <%= paginate @reserves %>
   </div>

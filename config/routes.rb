@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :users, :only => [:show] do
     collection do
-      get :favorites
+      get '/:id/favorites', to: 'users#favorites'
       get '/:id/myhotels', to: 'users#myhotels'
       get '/:id/myhotel/:hotel_id/myrooms', to: 'users#myrooms'
     end

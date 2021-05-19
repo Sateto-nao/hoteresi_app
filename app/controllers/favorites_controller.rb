@@ -1,5 +1,4 @@
 class FavoritesController < ApplicationController
-
   before_action :set_room
 
   def create
@@ -9,13 +8,12 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    @favorite = Favorite.find_by(user_id: current_user.id, room_id: @room.id)
-    @favorite.destroy
+    favorite = Favorite.find_by(user_id: current_user.id, room_id: @room.id)
+    favorite.destroy
   end
 
   private
   def set_room
     @room = Room.find(params[:room_id])
   end
-
 end

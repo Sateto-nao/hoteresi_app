@@ -1,0 +1,55 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 col-sm-3 d-none d-sm-block">
+      <%= render 'users/shared/side_menu', user: @user %>
+    </div>
+    <div class="col-12 col-sm-9">
+      <div class="card shadow-sm">
+        <%= render 'users/shared/header_menu', user: @user %>
+        <div class="card-body">
+          <% unless @favorites.blank? %>
+          <h4 class="text-left">お気に入りルーム <small class="text-muted"><<%= @favorites.count %>件></small></h4>
+          <% else %>
+          <h4>お気に入りのルームを登録するとここに表示されます</h4>
+          <% end %>
+          <% @favorites.each do |favorite| %>
+          <div class="card shadow-sm mb-3">
+            <div class="row no-gutters">
+              <div class="col-lg-7">
+                <%= link_to (image_tag favorite.room_img.thumb.to_s, {width: "100%", class: "img-fluid"}),hotel_room_path(hotel_id: favorite.hotel_id, id: favorite.id)  %>
+              </div>
+              <div class="col-lg-5 my-auto">
+                <div class="overflow-auto" style="width:100%; height:200px;">
+                  <div class="card-body p-5">
+                    <div class="text-right">
+                      <small class="text-muted">下へスクロール</small>
+                    </div>
+                    <h6 class="card-title"><%= link_to favorite.room_name, hotel_room_path(hotel_id: favorite.hotel_id, id: favorite.id)%></h6>
+                    <p class="card-text">賃料: ￥<%= favorite.price %><br>
+                      最大人数: ￥<%= favorite.group %>人<br>
+                      <% if favorite.smoke == "1" %>
+                      禁煙
+                      <% else %>
+                      喫煙可
+                      <% end %>
+                    </p>
+                    <p class="card-text">
+                      <small class="text-muted">
+                        <%= favorite.introduction %>
+                      </small>
+                    </p>
+                    <div class="text-right pr-2">
+                      <small class="text-muted">Update: <%= favorite.updated_at.strftime('%Y/%m/%d') %></small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= paginate @favorites %>
+</div>
