@@ -52,9 +52,14 @@
                         <small class="text-muted">Update: <%= hotel.updated_at.strftime('%Y/%m/%d') %></small>
                       </div>
                       <% if current_user.id == @user.id %>
-                        <%= link_to "ホテル編集", edit_hotel_path(hotel.id), class:"pr-1" %>
-                        <%= link_to "ルーム登録", new_hotel_room_path(hotel.id), class:"pr-1" %>
-                        <%= link_to "ルーム一覧", "/users/#{@user.id}/myhotel/#{hotel.id}/myrooms", class:"pr-1" %>
+                        <div>
+                          <%= link_to "ホテル編集", edit_hotel_path(hotel.id), class:"pr-1" %>
+                          <%= link_to "ルーム登録", new_hotel_room_path(hotel.id), class:"pr-1" %>
+                        </div>
+                        <div>
+                          <%= link_to "ルーム一覧", "/users/#{@user.id}/myhotel/#{hotel.id}/myrooms", class:"pr-1" %>
+                          <%= link_to "問い合わせ", "/users/#{@user.id}/myhotel/#{hotel.id}/contacts", class:"pr-1" %>
+                        </div>
                       <% end %>
                     </div>
                   </div>

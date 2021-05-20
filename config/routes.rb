@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       get '/:id/favorites', to: 'users#favorites'
       get '/:id/myhotels', to: 'users#myhotels'
       get '/:id/myhotel/:hotel_id/myrooms', to: 'users#myrooms'
+      get '/:id/myhotel/:hotel_id/contacts', to: 'users#contacts'
     end
   end
 
@@ -27,6 +28,6 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
     end
   end
-  resources :reserves
+  resources :reserves, only: [:index, :create, :destroy]
 end
 # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

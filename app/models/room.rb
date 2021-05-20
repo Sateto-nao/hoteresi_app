@@ -8,10 +8,10 @@ class Room < ApplicationRecord
   validates :group, presence: true
   validates :smoke, presence: true
 
-
   mount_uploader :room_img, RoomImageUploader
 
   belongs_to :hotel
   belongs_to :user
+  has_many :reserves
   has_many :favorites, dependent: :destroy
 end

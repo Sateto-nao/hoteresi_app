@@ -2,9 +2,6 @@ class ReservesController < ApplicationController
 
   def index
     @reserves = Reserve.where(user_id: current_user.id).page(params[:page]).per(5).order('created_at DESC')
-    @reserves.each do |reserve|
-      @room = Room.find(reserve.room_id )
-    end
     @user = User.find(current_user.id)
   end
 
@@ -26,6 +23,6 @@ class ReservesController < ApplicationController
   end
 
   def reserve_params
-    params.require(:reserve).permit(:user_id, :room_id, :group, :contract, :how_contract, :preview, :how_preview, :contact_id, :notes, :start_date)
+    params.require(:reserve).permit(:user_id, :room_id, :group, :contract, :how_contract, :preview, :how_preview, :contact_id, :notes, :start_date, :hotel_id)
   end
 end

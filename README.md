@@ -18,7 +18,7 @@ Rails '6.1.3.1'
 
 # ER図
 
-<img src="https://i.gyazo.com/b3f278d7b632d3a641fb7862117b41dc.png" width="300">
+<img src="https://user-images.githubusercontent.com/74028310/118826541-88b59800-b8f6-11eb-8c6c-7c11b8bcd923.png" width="300">
 
 # 導入技術
 

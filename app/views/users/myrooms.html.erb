@@ -7,7 +7,7 @@
       <div class="card shadow-sm">
         <%= render 'users/shared/header_menu', user: @user %>
         <div class="card-body">
-          <% unless @hotel.rooms.blank? %>
+          <% unless @rooms.blank? %>
           <h4 class="text-left">ホテルルーム
             <%= link_to 'ルーム登録', new_hotel_room_path(@hotel.id), {class: "btn btn-outline-primary"} %>
           </h4>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_18_001952) do
+ActiveRecord::Schema.define(version: 2021_05_20_012110) do
 
   create_table "contacts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2021_05_18_001952) do
     t.string "how_contract"
     t.date "contract"
     t.bigint "contact_id"
+    t.string "hotel_id"
     t.index ["contact_id"], name: "index_reserves_on_contact_id"
   end
 

@@ -25,21 +25,6 @@ class Reserve < ApplicationRecord
     contact.validates :notes, presence: true, length: {maximum: 500}
   end
 
-  validate :date_before_preview
-  validate :date_before_contract
-
-  def date_before_preview
-    return if preview.blank?
-    errors.add(:preview,"は3日以降のものを選択してください") if preview < Date.today.since(3.days)
-  end
-
-  def date_before_contract
-    return if contract.blank?
-    errors.add(:contract,"は3日以降のものを選択してください") if contract < Date.today.since(3.days)
-  end
-
-
-
   def contact_id_0?
     contact_id == 0
   end
@@ -56,6 +41,20 @@ class Reserve < ApplicationRecord
     contact_id == 4
   end
 
-  belongs_to :user
 
+  validate :date_before_preview
+  validate :date_before_contract
+
+  def date_before_preview
+    return if preview.blank?
+    errors.add(:preview,"は3日以降のものを選択してください") if preview < Date.today.since(3.days)
+  end
+
+  def date_before_contract
+    return if contract.blank?
+    errors.add(:contract,"は3日以降のものを選択してください") if contract < Date.today.since(3.days)
+  end
+
+  belongs_to :user
+  belongs_to :room
 end

@@ -2,13 +2,12 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   # before_action :ensure_current_user
   before_action :set_user
-  before_action :set_hotels
 
   def show
   end
 
   def myhotels
-    @hotels = Hotel.page(params[:page]).per(5).order('created_at DESC')
+    @hotels = Hotel.where(id: current_user.id).page(params[:page]).per(5).order('created_at DESC')
   end
 
   def myrooms
@@ -22,15 +21,15 @@ class UsersController < ApplicationController
     @favorites = Kaminari.paginate_array(likerooms).page(params[:page]).per(5)
   end
 
+  def contacts
+    @reserves = Reserve.where(hotel_id: params[:hotel_id]).page(params[:page]).per(5).order('created_at DESC')
+  end
+
 
   private
 
   def set_user
     @user = User.find(params[:id])
-  end
-
-  def set_hotels
-    @hotels = Hotel.where(id: current_user.id)
   end
 
   def ensure_current_user

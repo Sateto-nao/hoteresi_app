@@ -6,19 +6,36 @@
         <div class="card-body p-5">
           <h5 class="card-title"><%= @room.hotel.hotel_name %> / <%= @room.room_name %></h5>
           <p class="card-text text-muted">
-            <%= safe_join(@room.introduction.split("\n"),tag(:br)) %>
+            <small><%= safe_join(@room.introduction.split("\n"),tag(:br)) %></small>
           </p>
-          <h5 class="card-text text-md-right">
-            最大人数: ￥<%= @room.group %>人
-          </h5>
-          <h5 class="card-text text-md-right">
+          <p class="card-text float-md-left">
+            <% if @room.hotel.preview == "1" %>
+              オンライン内見可
+            <% else %>
+              オンライン内見不可
+            <% end %><br>
+            <% if @room.hotel.contract == "1" %>
+              オンライン契約可
+            <% else %>
+              オンライン契約不可
+            <% end %><br>
+            <% if @room.hotel.parking == "1" %>
+              駐車場:有
+            <% else %>
+              駐車場:無
+            <% end %>
+          </p>
+          <h6 class="card-text text-md-right">
+            最大人数: <%= @room.group %>人
+          </h6>
+          <h6 class="card-text text-md-right">
             <% if @room.smoke == "1" %>
               禁煙
             <% else %>
               喫煙可
             <% end %>
-          </h5>
-          <h5 class="card-text text-md-right">賃料: ￥<%= @room.price %></h5>
+          </h6>
+          <h6 class="card-text text-md-right">賃料: ￥<%= @room.price %></h6>
           <div class="text-right pr-2">
             <small class="text-muted">Update: <%= @room.updated_at.strftime('%Y/%m/%d') %></small>
           </div>
@@ -39,14 +56,28 @@
           </div>
         </div>
         <div class="form-row">
+          <% if @room.hotel.preview == "2" %>
+          <div class="form-group col-md-6">
+            <%= f.label :how_preview, "希望の内見方法(内見日を指定してください)" %>
+            <%= f.select :how_preview, {'来館内見': "来館内見"},{ include_blank: '選択してください'},  {class: "form-control"} %>
+          </div>
+          <% else %>
           <div class="form-group col-md-6">
             <%= f.label :how_preview, "希望の内見方法(内見日を指定してください)" %>
             <%= f.select :how_preview, {'オンライン内見': "オンライン内見", '来館内見': "来館内見"},{ include_blank: '選択してください'},  {class: "form-control"} %>
           </div>
+          <% end %>
+          <% if @room.hotel.contract == "2" %>
+          <div class="form-group col-md-6">
+            <%= f.label :how_contract, "希望の契約方法(説明日を指定してください)" %>
+            <%= f.select :how_contract, {'来館契約': "来館契約"},{ include_blank: '選択してください'},  {class: "form-control"} %>
+          </div>
+          <% else %>
           <div class="form-group col-md-6">
             <%= f.label :how_contract, "希望の契約方法(説明日を指定してください)" %>
             <%= f.select :how_contract, {'オンライン契約': "オンライン契約", '来館契約': "来館契約"},{ include_blank: '選択してください'},  {class: "form-control"} %>
           </div>
+          <% end %>
         </div>
         <div>
           <%= f.label :preview, "希望の内見日(3日以降の日程を指定してください)" %>
@@ -83,6 +114,7 @@
           <%= f.submit "送信", class: "btn btn-outline-primary" %>
           <%= f.hidden_field :user_id, value: current_user.id %>
           <%= f.hidden_field :room_id, value: @room.id %>
+          <%= f.hidden_field :room_id, value: @room.hotel_id %>
         </div>
       </form>
       <% end %>

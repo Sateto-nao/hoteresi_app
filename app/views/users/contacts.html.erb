@@ -7,10 +7,10 @@
       <div class="card shadow-sm">
         <%= render 'users/shared/header_menu', user: @user %>
         <div class="card-body">
-          <% unless @reserve.blank? %>
-            <h4 class="text-left">お問い合わせ一覧</h4>
+          <% unless @reserves.blank? %>
+            <h4 class="text-left">ルーム問い合わせ一覧<span class="text-primary">(<%= @reserves.count %>)</span></h4>
           <% else %>
-            <h4>ルームのお問い合わせはこちらに表示されます</h4>
+            <h4>ルームへの問い合わせはこちらに表示されます</h4>
           <% end %>
           <% @reserves.each do |reserve| %>
           <div class="card shadow-sm">
