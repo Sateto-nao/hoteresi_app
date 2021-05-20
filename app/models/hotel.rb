@@ -38,9 +38,7 @@ class Hotel < ApplicationRecord
   validates :address_street, presence: true
   validates :address_building, presence: true, uniqueness: true
 
-  has_many_attached :images, dependent: :destroy
-  has_many_blobs :images, dependent: :destroy
-  has_many_records :images, dependent: :destroy
+
   belongs_to :user
   has_many :rooms, dependent: :destroy
   accepts_nested_attributes_for :rooms
