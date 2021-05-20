@@ -1,4 +1,5 @@
-# hoteresi_app(ホテレジ)サービス概要
+# hoteresi(ホテレジ)サービス概要
+Herokuアプリはこちら： https://hoteresi.herokuapp.com/
 
  "hoteresiは"レジデンスサービスを提供するホテルを探し、サービスを受けるためのアプリを模した
  ポートフォリオアプリです。  
