@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  # before_action :ensure_current_user
+  before_action :ensure_current_user
   before_action :set_user
 
   def show
