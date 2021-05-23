@@ -18,6 +18,15 @@ ActiveRecord::Schema.define(version: 2021_05_20_012110) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "favorites", charset: "utf8mb4", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.bigint "room_id"
+    t.index ["room_id"], name: "index_favorites_on_room_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "hotels", charset: "utf8mb4", force: :cascade do |t|
     t.string "hotel_name"
     t.text "introduction"
@@ -93,5 +102,7 @@ ActiveRecord::Schema.define(version: 2021_05_20_012110) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "favorites", "rooms"
+  add_foreign_key "favorites", "users"
   add_foreign_key "reserves", "contacts"
 end
