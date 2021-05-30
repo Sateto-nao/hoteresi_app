@@ -37,6 +37,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'faker'
 end
 
 group :development do
@@ -64,7 +65,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # add gem
 # login
-gem "devise", git: "https://github.com/heartcombo/devise" # エラーが出たので解消されていそうなmaster branchを指定したらクリア
+gem "devise", git: "https://github.com/heartcombo/devise"
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 
